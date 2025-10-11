@@ -1,0 +1,205 @@
+{
+  // Cursor (IDE)
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "update.releaseTrack": "prerelease",
+
+  // Look and Feel
+  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.iconTheme": "catppuccin-macchiato",
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true,
+  "editor.fontWeight": "600",
+  "editor.wordWrap": "bounded",
+  "editor.renderLineHighlight": "none",
+  "editor.renderControlCharacters": false,
+  "editor.smoothScrolling": true,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.horizontalScrollbarSize": 5,
+  "editor.scrollbar.verticalScrollbarSize": 8,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.size": "fill",
+  "editor.minimap.enabled": true,
+  "editor.minimap.autohide": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "line",
+  "editor.hideCursorInOverviewRuler": true,
+  "window.titleBarStyle": "custom",
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "breadcrumbs.enabled": false,
+
+  // Formatting and Linting
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.removeUnusedImports": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "editor.detectIndentation": true,
+  "files.trimTrailingWhitespace": true,
+
+  // Git
+  "git.ignoreMissingGitWarning": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+
+  // Security
+  "security.workspace.trust.untrustedFiles": "open",
+
+  // Extensions
+  "extensions.ignoreRecommendations": true,
+
+  // Editor Behavior
+  "editor.selectionHighlight": false,
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.suggest.preview": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggest.showStatusBar": false,
+  "editor.suggest.showWords": false,
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.occurrencesHighlight": "off",
+  "editor.guides.bracketPairs": true,
+  "editor.bracketPairColorization.enabled": false,
+  "editor.hover.enabled": true,
+  "editor.hover.sticky": true,
+  "editor.stickyScroll.scrollWithEditor": false,
+  "editor.linkedEditing": true,
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.glyphMargin": false,
+  "editor.mouseWheelZoom": true,
+
+  // Token Customizations
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          //following will be in italic (=FlottFlott)
+          "comment",
+          "entity.name.type.class", //class names
+          "keyword", //import, export, return…
+          "constant", //String, Number, Boolean…, this, super
+          "storage.modifier", //static keyword
+          "storage.type.class.js", //class keyword
+          "storage.type.function.js" // function keyword
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          //following will be excluded from italics (VSCode has some defaults for italics)
+          "invalid",
+          "keyword.operator",
+          "constant.numeric.css",
+          "keyword.other.unit.px.css",
+          "constant.numeric.decimal.js",
+          "constant.numeric.json"
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+
+  // Explorer
+  "explorer.confirmDelete": false,
+  "explorer.compactFolders": false,
+  "explorer.decorations.colors": true,
+  "explorer.decorations.badges": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+
+  // TypeScript and JavaScript
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.tsserver.log": "off",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Vim
+  "vim.leader": "<Space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // redo in normal mode
+    {
+      "before": ["U"],
+      "after": ["<C-r>"]
+    },
+    {
+      "before": ["<S-h>"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["<S-l>"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    {
+      "before": ["<S-j>"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["<S-k>"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "vim.insertModeKeyBindings": [],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "vim.useSystemClipboard": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(203, 166, 247, 0.4)",
+  "vim.highlightedyank.duration": 200,
+
+  // Terminal
+  "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "auto",
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.enableImages": true,
+  "terminal.integrated.enableVisualBell": true,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontWeight": "600",
+  "terminal.integrated.sendKeybindingsToShell": true,
+
+  // Files
+  "files.exclude": {
+    "**/.vs": true,
+    "**/bin": true,
+    "**/obj": true
+  },
+  "cursor.composer.shouldAllowCustomModes": true
+}

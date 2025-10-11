@@ -1,0 +1,286 @@
+[
+  // ===== BASIC NAVIGATION =====
+  // Arrow key navigation using Ctrl + HJKL
+  {
+    "command": "workbench.action.navigateLeft",
+    "key": "ctrl-h"
+  },
+  {
+    "command": "workbench.action.navigateRight",
+    "key": "ctrl-l"
+  },
+  {
+    "command": "workbench.action.navigateUp",
+    "key": "ctrl-k"
+  },
+  {
+    "command": "workbench.action.navigateDown",
+    "key": "ctrl-j"
+  },
+  // ===== WORKSPACE & EDITOR MANAGEMENT =====
+  // Show all open editors
+  {
+    "command": "workbench.action.showAllEditors",
+    "key": "space ,",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Split editor horizontally
+  {
+    "command": "workbench.action.splitEditor",
+    "key": "space h s",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Split editor vertically
+  {
+    "command": "workbench.action.splitEditorDown",
+    "key": "space v s",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // ===== CODE EDITING & ACTIONS =====
+  // Save current file
+  {
+    "command": "workbench.action.files.saveFiles",
+    "key": "space s",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Show code actions (quick fixes, refactoring)
+  {
+    "command": "editor.action.codeAction",
+    "key": "space c a",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Move line up (Shift+K - optimized for Vim cursor)
+  {
+    "command": "editor.action.moveLinesUpAction",
+    "key": "shift-k",
+    "when": "vim.mode == 'Normal' && editorTextFocus && !suggestWidgetVisible && !parameterHintsVisible"
+  },
+  // Move line down (Shift+J - optimized for Vim cursor)
+  {
+    "command": "editor.action.moveLinesDownAction",
+    "key": "shift-j",
+    "when": "vim.mode == 'Normal' && editorTextFocus && !suggestWidgetVisible && !parameterHintsVisible"
+  },
+  // Show hover information
+  {
+    "command": "editor.action.showHover",
+    "key": "space k",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Rename symbol
+  {
+    "command": "editor.action.rename",
+    "key": "space c r",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Go to symbol in workspace
+  {
+    "command": "workbench.action.gotoSymbol",
+    "key": "space c s",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Close current editor tab
+  {
+    "command": "workbench.action.closeActiveEditor",
+    "key": "space b d",
+    "when": "(vim.mode == 'Normal' && editorTextFocus) || !inputFocus"
+  },
+  // Close other editor tabs
+  {
+    "command": "workbench.action.closeOtherEditors",
+    "key": "space b o",
+    "when": "(vim.mode == 'Normal' && editorTextFocus) || !inputFocus"
+  },
+  // Quick open file
+  {
+    "command": "workbench.action.quickOpen",
+    "key": "space space",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Go to definition
+  {
+    "command": "editor.action.revealDefinition",
+    "key": "space g d",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Go to references
+  {
+    "command": "editor.action.goToReferences",
+    "key": "space g r",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Go to implementation
+  {
+    "command": "editor.action.goToImplementation",
+    "key": "space g i",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Find in files
+  {
+    "command": "workbench.action.findInFiles",
+    "key": "space f g",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Open Git/SCM panel
+  {
+    "args": {
+      "commands": ["workbench.view.scm", "workbench.scm.focus"]
+    },
+    "command": "runCommands",
+    "key": "space g g",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Add selection to next find match
+  {
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "key": "ctrl-n",
+    "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
+  },
+  // Format document
+  {
+    "command": "editor.action.formatDocument",
+    "key": "space f t",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Toggle zen mode
+  {
+    "command": "workbench.action.toggleZenMode",
+    "key": "space z",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // ===== FILE EXPLORER =====
+  // File operations when focused on file explorer
+  // Rename file/folder
+  {
+    "command": "renameFile",
+    "key": "r",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Copy file/folder
+  {
+    "command": "filesExplorer.copy",
+    "key": "c",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Paste file/folder
+  {
+    "command": "filesExplorer.paste",
+    "key": "p",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Cut file/folder
+  {
+    "command": "filesExplorer.cut",
+    "key": "x",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Delete file/folder
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Create new file
+  {
+    "command": "explorer.newFile",
+    "key": "a",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Open file to side
+  {
+    "command": "explorer.openToSide",
+    "key": "s",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Open file in new split and close others
+  {
+    "args": {
+      "commands": [
+        "workbench.action.splitEditorDown",
+        "explorer.openAndPassFocus",
+        "workbench.action.closeOtherEditors"
+      ]
+    },
+    "command": "runCommands",
+    "key": "shift-s",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // Open file (when focused on file)
+  {
+    "command": "explorer.openAndPassFocus",
+    "key": "enter",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceIsFolder && !inputFocus"
+  },
+  // Expand/collapse folder (when focused on folder)
+  {
+    "command": "list.toggleExpand",
+    "key": "enter",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && explorerResourceIsFolder && !inputFocus"
+  },
+  // ===== DEBUGGING =====
+  // Start debugging
+  {
+    "command": "workbench.action.debug.selectandstart",
+    "key": "space d a",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && debuggersAvailable"
+  },
+  // Stop debugging
+  {
+    "command": "workbench.action.debug.stop",
+    "key": "space d t",
+    "when": "vim.mode == 'Normal' && editorTextFocus && inDebugMode && !focusedSessionIsAttached"
+  },
+  // Step over
+  {
+    "command": "workbench.action.debug.stepOver",
+    "key": "space d o",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && inDebugMode && debugState == 'stopped'"
+  },
+  // Toggle breakpoint
+  {
+    "command": "editor.debug.action.toggleBreakpoint",
+    "key": "space d b",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  },
+  // Show debug hover
+  {
+    "command": "editor.debug.action.showDebugHover",
+    "key": "space d e",
+    "when": "vim.mode == 'Normal' && editorTextFocus && inDebugMode && debugState == 'stopped'"
+  },
+  // Continue debugging
+  {
+    "command": "workbench.action.debug.continue",
+    "key": "space d c",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && inDebugMode && debugState == 'stopped'"
+  },
+
+  // ===== WORKSPACE UI CONTROLS =====
+  // Toggle terminal
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "key": "space t",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Toggle panel (terminal, problems, output, etc.)
+  {
+    "command": "workbench.action.togglePanel",
+    "key": "space p",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Toggle sidebar visibility
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "space e",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  // Trigger IntelliSense (moves cursor right first for Vim compatibility)
+  {
+    "args": {
+      "commands": ["cursorRight", "editor.action.triggerSuggest"]
+    },
+    "command": "runCommands",
+    "key": "space i",
+    "when": "vim.mode == 'Normal' && editorTextFocus"
+  }
+]
