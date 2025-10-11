@@ -142,12 +142,16 @@ for tool in "${REQUIRED_TOOLS[@]}"; do
     fi
 done
 
-# Check Karabiner-Elements (cask) - check if the app exists
-if [[ -d "/Applications/Karabiner-Elements.app" ]]; then
-    print_status "PASS" "Karabiner-Elements is installed"
-else
-    print_status "WARN" "Karabiner-Elements is not installed (requires manual installation)"
-fi
+# Check GUI applications (casks)
+GUI_APPS=("Karabiner-Elements" "Raycast" "Rectangle")
+
+for app in "${GUI_APPS[@]}"; do
+    if [[ -d "/Applications/$app.app" ]]; then
+        print_status "PASS" "$app is installed"
+    else
+        print_status "WARN" "$app is not installed (requires manual installation)"
+    fi
+done
 
 echo ""
 
@@ -362,6 +366,30 @@ fi
 echo ""
 
 # =============================================================================
+# GUI APPLICATION CONFIGURATIONS
+# =============================================================================
+echo -e "${BLUE}🖥️  GUI Application Configurations${NC}"
+echo "----------------------------------------"
+
+# Check for Raycast configuration
+if file_exists "raycast/config.rayconfig"; then
+    print_status "PASS" "Raycast configuration file exists"
+    print_status "INFO" "Import manually: Raycast → Preferences → Import from raycast/config.rayconfig"
+else
+    print_status "WARN" "Raycast configuration file not found"
+fi
+
+# Check for Rectangle configuration
+if file_exists "rectangle/config.json"; then
+    print_status "PASS" "Rectangle configuration file exists"
+    print_status "INFO" "Import manually: Rectangle → Preferences → Import from rectangle/config.json"
+else
+    print_status "WARN" "Rectangle configuration file not found"
+fi
+
+echo ""
+
+# =============================================================================
 # STOW PACKAGES
 # =============================================================================
 echo -e "${BLUE}📦 Stow Packages${NC}"
@@ -372,7 +400,7 @@ if file_exists ".stowrc"; then
     print_status "PASS" "Stow configuration file exists"
 
     # Check for all expected packages
-    EXPECTED_PACKAGES=("atuin" "ghostty" "karabiner" "nvim" "ssh" "starship" "tmux" "vscode" "zsh")
+    EXPECTED_PACKAGES=("atuin" "ghostty" "karabiner" "nvim" "raycast" "rectangle" "ssh" "starship" "tmux" "vscode" "zsh")
 
     for package in "${EXPECTED_PACKAGES[@]}"; do
         if dir_exists "$package"; then

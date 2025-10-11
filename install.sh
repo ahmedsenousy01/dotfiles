@@ -85,21 +85,46 @@ if [[ ${#FAILED_PACKAGES[@]} -gt 0 ]]; then
 fi
 
 echo ""
-echo "📦 Installing Karabiner-Elements (requires password)..."
-echo "   This will prompt for your password to install system-level components"
-if brew install --cask karabiner-elements 2>&1; then
-    echo "✅ Karabiner-Elements installed successfully"
-else
-    echo "❌ FAILED to install Karabiner-Elements - see error above"
-    echo "   This is a system-level tool that requires password authentication"
-    echo "   Trying with sudo..."
-    if sudo brew install --cask karabiner-elements 2>&1; then
-        echo "✅ Karabiner-Elements installed successfully with sudo"
+echo "📦 Installing GUI applications (casks)..."
+echo "   This will install Raycast, Rectangle, and Karabiner-Elements"
+
+# Define cask packages to install
+CASK_PACKAGES=("raycast" "rectangle" "karabiner-elements")
+
+# Install cask packages with error handling
+FAILED_CASKS=()
+for cask in "${CASK_PACKAGES[@]}"; do
+    echo "Installing $cask..."
+    if brew install --cask "$cask" 2>&1; then
+        echo "✅ $cask installed successfully"
     else
-        echo "❌ FAILED to install Karabiner-Elements even with sudo"
-        echo "   Manual installation: brew install --cask karabiner-elements"
-        FAILED_PACKAGES+=("karabiner-elements")
+        echo "❌ FAILED to install $cask - see error above"
+        FAILED_CASKS+=("$cask")
+        echo "   Retrying $cask installation..."
+        if brew install --cask "$cask" 2>&1; then
+            echo "✅ $cask installed successfully on retry"
+            # Remove from failed list
+            FAILED_CASKS=("${FAILED_CASKS[@]/$cask}")
+        else
+            echo "❌ $cask FAILED AGAIN - manual installation required"
+        fi
     fi
+done
+
+# Report failed cask installations
+if [[ ${#FAILED_CASKS[@]} -gt 0 ]]; then
+    echo ""
+    echo "❌ CRITICAL: Failed to install these GUI applications:"
+    for cask in "${FAILED_CASKS[@]}"; do
+        echo "   - $cask"
+    done
+    echo ""
+    echo "🔧 Manual installation commands:"
+    for cask in "${FAILED_CASKS[@]}"; do
+        echo "   brew install --cask $cask"
+    done
+    echo ""
+    echo "⚠️  Some GUI tools may not work properly without these applications!"
 fi
 
 echo "✅ All dependencies installed"
@@ -231,6 +256,11 @@ fi
 
 echo "✅ Shell integrations configured"
 
+# Note about GUI application configurations
+echo "ℹ️  Note: GUI application configurations need manual import"
+echo "   - Rectangle: Import config from rectangle/config.json via Rectangle preferences"
+echo "   - Raycast: Import config from raycast/config.rayconfig via Raycast preferences"
+
 # Final instructions
 echo ""
 echo "🎉 Installation complete!"
@@ -258,7 +288,10 @@ echo "   2. Start tmux: tmux"
 echo "   3. Tmux plugins are automatically installed"
 echo "   4. Restart VS Code/Cursor to see the new configuration"
 echo "   5. Restart Karabiner-Elements to apply keyboard remappings"
-echo "   6. Install kubens manually: https://github.com/ahmetb/kubectx"
+echo "   6. Import GUI application configurations:"
+echo "      - Rectangle: Open Rectangle → Preferences → Import from rectangle/config.json"
+echo "      - Raycast: Open Raycast → Preferences → Import from raycast/config.rayconfig"
+echo "   7. Install kubens manually: https://github.com/ahmetb/kubectx"
 echo ""
 echo "🔧 Available tools:"
 echo "   - tmux: Terminal multiplexer with plugins"
@@ -273,6 +306,8 @@ echo "   - mise: Tool version manager"
 echo "   - atuin: Shell history search"
 echo "   - kubectl: Kubernetes CLI"
 echo "   - karabiner-elements: Keyboard remapping"
+echo "   - raycast: Productivity launcher (import config manually)"
+echo "   - rectangle: Window management (import config manually)"
 echo "   - vscode/cursor: IDE configuration (works for both)"
 echo ""
 echo "🚀 Your development environment is ready!"

@@ -1,11 +1,29 @@
 # Rectangle Configuration
 
+## Import Instructions
+
+1. Open Rectangle
+2. Go to Rectangle → Preferences
+3. Click on "Import" or "Restore from Backup"
+4. Select the `config.json` file from this directory
+
 ## Settings
 
-- **Running default configuration**
-- All window management shortcuts use Rectangle's default keybindings
+- **Custom window management shortcuts**
+- All window management shortcuts are configured for optimal workflow
+
+## Hotkeys
+
+- **Left Half**: `Cmd+Option+Left`
+- **Right Half**: `Cmd+Option+Right`
+- **Top Half**: `Cmd+Option+Up`
+- **Bottom Half**: `Cmd+Option+Down`
+- **Maximize**: `Cmd+Option+Enter`
+- **Center**: `Cmd+Option+C`
+- **Restore**: `Cmd+Option+Backspace`
 
 ## Notes
 
-- Rectangle provides window management with default hotkeys
-- No custom configuration currently applied
+- Rectangle provides comprehensive window management with custom hotkeys
+- Configuration includes all standard window management shortcuts
+- Must be imported manually through Rectangle preferences
