@@ -185,6 +185,16 @@ if command -v tmux &> /dev/null; then
         else
             echo "✅ Tmux plugins installation completed"
         fi
+
+        # Clean up installation sessions and resurrect cache
+        echo "   Cleaning up installation sessions..."
+        tmux kill-session -t 0 2>/dev/null || true
+        tmux kill-session -t plugin_install 2>/dev/null || true
+
+        # Clear resurrect cache to remove installation sessions
+        echo "   Clearing tmux-resurrect cache..."
+        rm -rf ~/.tmux/resurrect/* 2>/dev/null || true
+        echo "✅ Installation sessions and cache cleaned up"
     else
         echo "❌ FAILED to install tmux plugins"
     fi
