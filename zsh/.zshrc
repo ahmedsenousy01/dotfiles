@@ -47,8 +47,12 @@ fi
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Set proper terminal type for tmux and starship (consistent with tmux config)
-export TERM=screen-256color
+# Set proper terminal type - use xterm-256color for Ghostty, screen-256color for tmux
+if [[ -n "$TMUX" ]]; then
+    export TERM=screen-256color
+else
+    export TERM=xterm-256color
+fi
 
 # Preferred editor (dynamic path detection)
 export EDITOR=$(which nvim)
