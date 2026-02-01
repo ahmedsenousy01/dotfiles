@@ -201,5 +201,7 @@
     "**/bin": true,
     "**/obj": true
   },
-  "cursor.composer.shouldAllowCustomModes": true
+  "cursor.composer.shouldAllowCustomModes": true,
+  "sherlock.userId": "bd71a916-018f-44c4-a6fd-5a63ff90500e",
+  "workbench.statusBar.visible": false
 }

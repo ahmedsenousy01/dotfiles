@@ -32,6 +32,8 @@ stow zsh       # goes to ~/.zshrc
 stow vscode    # goes to ~/Library/Application Support/{Code,Cursor}/
 ```
 
+If `stow` reports conflicts (existing files in the target), move them out of the way (or delete them) and re-run `stow`.
+
 Deploy individual packages:
 
 ## Included Tools
@@ -39,7 +41,7 @@ Deploy individual packages:
 ### Terminal
 
 - **tmux** - Terminal multiplexer with plugins
-- **zsh** - Shell with Oh My Zsh
+- **zsh** - Shell with Carapace completions
 - **starship** - Shell prompt
 - **ghostty** - Terminal emulator
 
@@ -52,6 +54,7 @@ Deploy individual packages:
 ### Utilities
 
 - **fzf** - Fuzzy finder
+- **carapace** - Shell completions
 - **zoxide** - Smart cd
 - **eza** - ls replacement
 - **bat** - cat with syntax highlighting

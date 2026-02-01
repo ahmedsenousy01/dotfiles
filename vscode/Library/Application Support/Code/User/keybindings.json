@@ -18,23 +18,23 @@
     "key": "ctrl-j"
   },
   // ===== WORKSPACE & EDITOR MANAGEMENT =====
-  // Show all open editors
+  // Show all open editors (editor only - avoid stealing space+key in Composer/chat)
   {
     "command": "workbench.action.showAllEditors",
     "key": "space ,",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // Split editor horizontally
   {
     "command": "workbench.action.splitEditor",
     "key": "space h s",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // Split editor vertically
   {
     "command": "workbench.action.splitEditorDown",
     "key": "space v s",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // ===== CODE EDITING & ACTIONS =====
   // Save current file
@@ -79,23 +79,23 @@
     "key": "space c s",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   },
-  // Close current editor tab
+  // Close current editor tab (editor only)
   {
     "command": "workbench.action.closeActiveEditor",
     "key": "space b d",
-    "when": "(vim.mode == 'Normal' && editorTextFocus) || !inputFocus"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
-  // Close other editor tabs
+  // Close other editor tabs (editor only)
   {
     "command": "workbench.action.closeOtherEditors",
     "key": "space b o",
-    "when": "(vim.mode == 'Normal' && editorTextFocus) || !inputFocus"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
-  // Quick open file
+  // Quick open file (editor only)
   {
     "command": "workbench.action.quickOpen",
     "key": "space space",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // Go to definition
   {
@@ -115,20 +115,20 @@
     "key": "space g i",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   },
-  // Find in files
+  // Find in files (editor only)
   {
     "command": "workbench.action.findInFiles",
     "key": "space f g",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
-  // Open Git/SCM panel
+  // Open Git/SCM panel (editor only)
   {
     "args": {
       "commands": ["workbench.view.scm", "workbench.scm.focus"]
     },
     "command": "runCommands",
     "key": "space g g",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // Add selection to next find match
   {
@@ -142,11 +142,11 @@
     "key": "space f t",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   },
-  // Toggle zen mode
+  // Toggle zen mode (editor only)
   {
     "command": "workbench.action.toggleZenMode",
     "key": "space z",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // ===== FILE EXPLORER =====
   // File operations when focused on file explorer
@@ -218,11 +218,11 @@
     "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && explorerResourceIsFolder && !inputFocus"
   },
   // ===== DEBUGGING =====
-  // Start debugging
+  // Start debugging (editor only)
   {
     "command": "workbench.action.debug.selectandstart",
     "key": "space d a",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && debuggersAvailable"
+    "when": "vim.mode == 'Normal' && editorTextFocus && debuggersAvailable"
   },
   // Stop debugging
   {
@@ -230,11 +230,11 @@
     "key": "space d t",
     "when": "vim.mode == 'Normal' && editorTextFocus && inDebugMode && !focusedSessionIsAttached"
   },
-  // Step over
+  // Step over (editor only)
   {
     "command": "workbench.action.debug.stepOver",
     "key": "space d o",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && inDebugMode && debugState == 'stopped'"
+    "when": "vim.mode == 'Normal' && editorTextFocus && inDebugMode && debugState == 'stopped'"
   },
   // Toggle breakpoint
   {
@@ -248,31 +248,31 @@
     "key": "space d e",
     "when": "vim.mode == 'Normal' && editorTextFocus && inDebugMode && debugState == 'stopped'"
   },
-  // Continue debugging
+  // Continue debugging (editor only)
   {
     "command": "workbench.action.debug.continue",
     "key": "space d c",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus) && inDebugMode && debugState == 'stopped'"
+    "when": "vim.mode == 'Normal' && editorTextFocus && inDebugMode && debugState == 'stopped'"
   },
 
   // ===== WORKSPACE UI CONTROLS =====
-  // Toggle terminal
+  // Toggle terminal (editor only - so space+t doesn't steal in Composer/chat)
   {
     "command": "workbench.action.terminal.toggleTerminal",
     "key": "space t",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus && !sideBarFocus"
   },
-  // Toggle panel (terminal, problems, output, etc.)
+  // Toggle panel (editor only)
   {
     "command": "workbench.action.togglePanel",
     "key": "space p",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus && !sideBarFocus"
   },
-  // Toggle sidebar visibility
+  // Toggle sidebar visibility (editor only)
   {
     "command": "workbench.action.toggleSidebarVisibility",
     "key": "space e",
-    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+    "when": "vim.mode == 'Normal' && editorTextFocus"
   },
   // Trigger IntelliSense (moves cursor right first for Vim compatibility)
   {

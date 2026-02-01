@@ -5,6 +5,8 @@
 
 set -e
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -59,11 +61,6 @@ dir_exists() {
     [[ -d "$1" ]]
 }
 
-# Function to check if symlink exists and is valid
-symlink_valid() {
-    [[ -L "$1" && -e "$1" ]]
-}
-
 echo -e "${BLUE}🔍 Starting dotfiles validation...${NC}\n"
 
 # =============================================================================
@@ -80,6 +77,7 @@ else
 fi
 
 # Check Homebrew
+BREW_PREFIX=""
 if command_exists brew; then
     print_status "PASS" "Homebrew is installed"
     BREW_PREFIX=$(brew --prefix)
@@ -108,12 +106,12 @@ REQUIRED_TOOLS=(
     "tmux"
     "ghostty"
     "fzf"
+    "carapace"
     "zoxide"
     "starship"
     "eza"
     "bat"
     "tree"
-    "ranger"
     "fd"
     "rg"
     "nvim"
@@ -161,13 +159,6 @@ echo ""
 echo -e "${BLUE}🐚 Shell Configuration${NC}"
 echo "----------------------------------------"
 
-# Check Oh My Zsh
-if dir_exists "$HOME/.oh-my-zsh"; then
-    print_status "PASS" "Oh My Zsh is installed"
-else
-    print_status "FAIL" "Oh My Zsh is not installed"
-fi
-
 # Check zsh plugins
 ZSH_PLUGINS=(
     "zsh-autosuggestions"
@@ -175,10 +166,14 @@ ZSH_PLUGINS=(
 )
 
 for plugin in "${ZSH_PLUGINS[@]}"; do
-    if file_exists "$BREW_PREFIX/share/$plugin/$plugin.zsh"; then
-        print_status "PASS" "Zsh plugin $plugin is available"
+    if [[ -n "$BREW_PREFIX" ]]; then
+        if file_exists "$BREW_PREFIX/share/$plugin/$plugin.zsh"; then
+            print_status "PASS" "Zsh plugin $plugin is available"
+        else
+            print_status "FAIL" "Zsh plugin $plugin is not available"
+        fi
     else
-        print_status "FAIL" "Zsh plugin $plugin is not available"
+        print_status "FAIL" "Homebrew missing; cannot verify zsh plugin $plugin"
     fi
 done
 
@@ -197,6 +192,12 @@ if file_exists "$HOME/.zshrc"; then
         print_status "PASS" "Mise integration in .zshrc"
     else
         print_status "WARN" "Mise integration not found in .zshrc"
+    fi
+
+    if grep -q "carapace _carapace zsh" "$HOME/.zshrc"; then
+        print_status "PASS" "Carapace integration in .zshrc"
+    else
+        print_status "WARN" "Carapace integration not found in .zshrc"
     fi
 else
     print_status "FAIL" ".zshrc does not exist"
@@ -372,7 +373,7 @@ echo -e "${BLUE}🖥️  GUI Application Configurations${NC}"
 echo "----------------------------------------"
 
 # Check for Raycast configuration
-if file_exists "raycast/config.rayconfig"; then
+if file_exists "$SCRIPT_DIR/raycast/config.rayconfig"; then
     print_status "PASS" "Raycast configuration file exists"
     print_status "INFO" "Import manually: Raycast → Preferences → Import from raycast/config.rayconfig"
 else
@@ -380,7 +381,7 @@ else
 fi
 
 # Check for Rectangle configuration
-if file_exists "rectangle/config.json"; then
+if file_exists "$SCRIPT_DIR/rectangle/config.json"; then
     print_status "PASS" "Rectangle configuration file exists"
     print_status "INFO" "Import manually: Rectangle → Preferences → Import from rectangle/config.json"
 else
@@ -396,14 +397,14 @@ echo -e "${BLUE}📦 Stow Packages${NC}"
 echo "----------------------------------------"
 
 # Check if we're in the dotfiles directory
-if file_exists ".stowrc"; then
+if file_exists "$SCRIPT_DIR/.stowrc"; then
     print_status "PASS" "Stow configuration file exists"
 
     # Check for all expected packages
     EXPECTED_PACKAGES=("atuin" "ghostty" "karabiner" "nvim" "raycast" "rectangle" "ssh" "starship" "tmux" "vscode" "zsh")
 
     for package in "${EXPECTED_PACKAGES[@]}"; do
-        if dir_exists "$package"; then
+        if dir_exists "$SCRIPT_DIR/$package"; then
             print_status "PASS" "Stow package '$package' exists"
         else
             print_status "FAIL" "Stow package '$package' is missing"
@@ -425,7 +426,11 @@ echo "----------------------------------------"
 if [[ -n "$EDITOR" ]]; then
     print_status "PASS" "EDITOR is set to: $EDITOR"
 else
-    print_status "WARN" "EDITOR environment variable is not set"
+    if file_exists "$HOME/.zshrc" && grep -q "export EDITOR=" "$HOME/.zshrc"; then
+        print_status "PASS" "EDITOR is configured in .zshrc"
+    else
+        print_status "WARN" "EDITOR environment variable is not set"
+    fi
 fi
 
 if [[ -n "$TERM" ]]; then
@@ -437,7 +442,11 @@ fi
 if [[ -n "$STARSHIP_CONFIG" ]]; then
     print_status "PASS" "STARSHIP_CONFIG is set to: $STARSHIP_CONFIG"
 else
-    print_status "WARN" "STARSHIP_CONFIG environment variable is not set"
+    if file_exists "$HOME/.zshrc" && grep -q "export STARSHIP_CONFIG=" "$HOME/.zshrc"; then
+        print_status "PASS" "STARSHIP_CONFIG is configured in .zshrc"
+    else
+        print_status "WARN" "STARSHIP_CONFIG environment variable is not set"
+    fi
 fi
 
 echo ""
