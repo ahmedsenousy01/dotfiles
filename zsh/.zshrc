@@ -1,6 +1,9 @@
 export EDITOR='nvim'
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
+# Path (early so tools below can be found)
+export PATH="$HOME/.local/bin:$PATH"
+
 (( $+commands[starship] )) && [[ -t 1 ]] && eval "$(starship init zsh)"
 
 autoload -Uz compinit

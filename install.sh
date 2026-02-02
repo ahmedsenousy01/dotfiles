@@ -153,6 +153,28 @@ else
     echo "✅ All configurations deployed successfully"
 fi
 
+# SSH: build config for this machine (personal/work) – run after stow so ~/.ssh exists
+if [[ -n "$SSH_ROLE" && ( "$SSH_ROLE" == "personal" || "$SSH_ROLE" == "work" ) ]]; then
+    echo ""
+    echo "🔐 Configuring SSH for: $SSH_ROLE"
+    if [[ -x "./scripts/setup-ssh.sh" ]]; then
+        ./scripts/setup-ssh.sh "$SSH_ROLE" && echo "✅ SSH configured"
+    else
+        chmod +x ./scripts/setup-ssh.sh && ./scripts/setup-ssh.sh "$SSH_ROLE" && echo "✅ SSH configured"
+    fi
+elif [[ -t 0 ]]; then
+    echo ""
+    read -r -p "Configure SSH for this machine? (personal/work/skip) [skip]: " ssh_choice
+    ssh_choice="${ssh_choice:-skip}"
+    if [[ "$ssh_choice" == "personal" || "$ssh_choice" == "work" ]]; then
+        if [[ -x "./scripts/setup-ssh.sh" ]]; then
+            ./scripts/setup-ssh.sh "$ssh_choice" && echo "✅ SSH configured"
+        else
+            chmod +x ./scripts/setup-ssh.sh && ./scripts/setup-ssh.sh "$ssh_choice" && echo "✅ SSH configured"
+        fi
+    fi
+fi
+
 echo "🔌 Installing tmux plugins automatically..."
 if command_exists tmux; then
     if [[ ! -d "$HOME/.config/tmux/plugins/tpm" ]]; then
@@ -211,9 +233,10 @@ fi
 
 echo ""
 echo "📋 Next steps:"
-echo "   1. Restart your terminal or run: source ~/.zshrc"
-echo "   2. Start tmux: tmux"
-echo "   3. Restart VS Code/Cursor and Karabiner-Elements"
-echo "   4. Import GUI application configurations:"
+echo "   1. If you skipped SSH: ./scripts/setup-ssh.sh personal  (or  work)"
+echo "   2. Restart your terminal or run: source ~/.zshrc"
+echo "   3. Start tmux: tmux"
+echo "   4. Restart VS Code/Cursor and Karabiner-Elements"
+echo "   5. Import GUI application configurations:"
 echo "      - Rectangle: Open Rectangle → Preferences → Import from rectangle/config.json"
 echo "      - Raycast: Open Raycast → Preferences → Import from raycast/config.rayconfig"

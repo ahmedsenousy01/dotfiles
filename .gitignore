@@ -11,3 +11,6 @@ history.txt
 
 # Karabiner automatic backups
 karabiner/.config/karabiner/automatic_backups/
+
+# SSH config is built by setup-ssh.sh (not stored in repo)
+ssh/.ssh/config

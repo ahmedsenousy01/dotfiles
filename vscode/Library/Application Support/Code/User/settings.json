@@ -21,7 +21,7 @@
   "editor.minimap.renderCharacters": false,
   "editor.minimap.size": "fill",
   "editor.minimap.enabled": true,
-  "editor.minimap.autohide": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.cursorBlinking": "smooth",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorStyle": "line",
@@ -41,7 +41,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.removeUnusedImports": "always",
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "always",
   },
   "editor.detectIndentation": true,
   "files.trimTrailingWhitespace": true,
@@ -64,7 +64,7 @@
   "editor.suggestOnTriggerCharacters": false,
   "editor.suggest.preview": true,
   "editor.quickSuggestions": {
-    "strings": true
+    "strings": true,
   },
   "editor.snippetSuggestions": "bottom",
   "editor.suggest.showStatusBar": false,
@@ -73,7 +73,7 @@
   "editor.occurrencesHighlight": "off",
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.enabled": false,
-  "editor.hover.enabled": true,
+  "editor.hover.enabled": "on",
   "editor.hover.sticky": true,
   "editor.stickyScroll.scrollWithEditor": false,
   "editor.linkedEditing": true,
@@ -93,11 +93,11 @@
           "constant", //String, Number, Boolean…, this, super
           "storage.modifier", //static keyword
           "storage.type.class.js", //class keyword
-          "storage.type.function.js" // function keyword
+          "storage.type.function.js", // function keyword
         ],
         "settings": {
-          "fontStyle": "italic"
-        }
+          "fontStyle": "italic",
+        },
       },
       {
         "scope": [
@@ -107,13 +107,13 @@
           "constant.numeric.css",
           "keyword.other.unit.px.css",
           "constant.numeric.decimal.js",
-          "constant.numeric.json"
+          "constant.numeric.json",
         ],
         "settings": {
-          "fontStyle": ""
-        }
-      }
-    ]
+          "fontStyle": "",
+        },
+      },
+    ],
   },
 
   // Explorer
@@ -141,43 +141,43 @@
     // redo in normal mode
     {
       "before": ["U"],
-      "after": ["<C-r>"]
+      "after": ["<C-r>"],
     },
     {
       "before": ["<S-h>"],
-      "commands": ["workbench.action.focusLeftGroup"]
+      "commands": ["workbench.action.focusLeftGroup"],
     },
     {
       "before": ["<S-l>"],
-      "commands": ["workbench.action.focusRightGroup"]
+      "commands": ["workbench.action.focusRightGroup"],
     },
     {
       "before": ["<S-j>"],
-      "commands": ["workbench.action.focusBelowGroup"]
+      "commands": ["workbench.action.focusBelowGroup"],
     },
     {
       "before": ["<S-k>"],
-      "commands": ["workbench.action.focusAboveGroup"]
+      "commands": ["workbench.action.focusAboveGroup"],
     },
     {
       "before": [">"],
-      "commands": ["editor.action.indentLines"]
+      "commands": ["editor.action.indentLines"],
     },
     {
       "before": ["<"],
-      "commands": ["editor.action.outdentLines"]
-    }
+      "commands": ["editor.action.outdentLines"],
+    },
   ],
   "vim.insertModeKeyBindings": [],
   "vim.visualModeKeyBindings": [
     {
       "before": [">"],
-      "commands": ["editor.action.indentLines"]
+      "commands": ["editor.action.indentLines"],
     },
     {
       "before": ["<"],
-      "commands": ["editor.action.outdentLines"]
-    }
+      "commands": ["editor.action.outdentLines"],
+    },
   ],
   "vim.useSystemClipboard": true,
   "vim.highlightedyank.enable": true,
@@ -199,7 +199,8 @@
   "files.exclude": {
     "**/.vs": true,
     "**/bin": true,
-    "**/obj": true
+    "**/obj": true,
   },
-  "cursor.composer.shouldAllowCustomModes": true
+  "cursor.composer.shouldAllowCustomModes": true,
+  "chat.commandCenter.enabled": false,
 }
